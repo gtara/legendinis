@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <table>
+      {% for entry in entries %}
+        <tr>
+		<td>{{entry.username}}</td>
+		<td width="500px">{{entry.message|safe}}</td>
+		<td width="100px"><h6>{{entry.time}}</h6></td>
+        </tr>      
+      {% endfor %}
+
+    </table> 
+    <form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
+      <dl>
+        <dt>Ka galvoju:<input type="text" size="30" name="message" id="rasliava">        
+        <input type="submit" value="" >
+      </dl>
+   </form>
+   <a href="{{ url_for('logout') }}" >Gana jau</a>
+  {% endif %}
+{% endblock %}
