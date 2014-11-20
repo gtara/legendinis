@@ -17,9 +17,17 @@ app.config.from_envvar('LEGENDINIS_SETTINGS', silent=True)
 currentmsg="";
 
 def write_db(user, message):
-    dt = datetime.datetime.now()
+    statinfo = os.stat(FILENAME)
+    dt=datetime.datetime.now()
+    
+    if statinfo.st_size > 3078:
+        newname = str(dt.strftime('%Y%m%d%H%M%S'))
+        newname = newname + ".history"
+        print newname
+        os.rename(FILENAME,newname)
+    print "failo dydis " + str(statinfo.st_size)
     sdt = dt.strftime('%Y/%m/%d %H:%M:%S')
-    with open(FILENAME, "a") as myfile:
+    with open(FILENAME, "a+") as myfile:
       myfile.write(user + ',' + sdt+ ',' + message + "\n");
       myfile.close();
 
