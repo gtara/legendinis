@@ -23,9 +23,7 @@ def write_db(user, message):
     if statinfo.st_size > 3078:
         newname = str(dt.strftime('%Y%m%d%H%M%S'))
         newname = newname + ".history"
-        print newname
         os.rename(FILENAME,newname)
-    print "failo dydis " + str(statinfo.st_size)
     sdt = dt.strftime('%Y/%m/%d %H:%M:%S')
     with open(FILENAME, "a+") as myfile:
       myfile.write(user + ',' + sdt+ ',' + message + "\n");
@@ -43,7 +41,6 @@ def read_db():
     for k in messagereader:
         tripple = [k[0], k[1], k[2]]
         list.append(tripple);
-    print "I was reading db " + str(len(list))   
     return list;
 
 
